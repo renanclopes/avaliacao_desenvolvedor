@@ -34,3 +34,5 @@ C:\WebProjects\avaliacao_desenvolvedor\SalesDataImporter\SalesDataImporter.Tests
 C:\WebProjects\avaliacao_desenvolvedor\SalesDataImporter\SalesDataImporter.Tests\obj\Debug\SalesDataImporter.Tests.csproj.CopyComplete
 C:\WebProjects\avaliacao_desenvolvedor\SalesDataImporter\SalesDataImporter.Tests\obj\Debug\SalesDataImporter.Tests.dll
 C:\WebProjects\avaliacao_desenvolvedor\SalesDataImporter\SalesDataImporter.Tests\obj\Debug\SalesDataImporter.Tests.pdb
+C:\WebProjects\avaliacao_desenvolvedor\SalesDataImporter\SalesDataImporter.Tests\bin\Debug\EntityFramework.dll
+C:\WebProjects\avaliacao_desenvolvedor\SalesDataImporter\SalesDataImporter.Tests\bin\Debug\EntityFramework.xml

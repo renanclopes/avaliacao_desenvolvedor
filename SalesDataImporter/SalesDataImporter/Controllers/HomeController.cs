@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SalesDataImporter.Models;
 
 namespace SalesDataImporter.Controllers
 {
@@ -13,18 +14,21 @@ namespace SalesDataImporter.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public Cliente GetClienteByName(string name)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            return new Cliente {Id = 1, Nome = "Renan"};
         }
 
-        public ActionResult Contact()
+        public Fornecedor GetFornecedorByRazaoSocial(string razao)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return new Fornecedor {Id = 1, RazaoSocial = "Fornecedor 1"};
         }
+
+        public Produto GetProdutoByDescricao(string descricao)
+        {
+            return new Produto {Id = 1, Descricao = "Produto 1", Preco = 10};
+        }
+
+
     }
 }

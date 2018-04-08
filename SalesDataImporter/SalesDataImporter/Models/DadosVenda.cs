@@ -15,12 +15,19 @@ namespace SalesDataImporter.Models
 
         [Required]
         public int ClienteId { get; set; }
+        [ForeignKey("ClienteId")]
+
+        public Cliente Cliente { get; set; }
 
         [Required]
         public int FornecedorId { get; set; }
+        [ForeignKey("FornecedorId")]
+        public Fornecedor Fornecedor { get; set; }
 
         [Required]
         public int ProdutoId { get; set; }
+        [ForeignKey("ProdutoId")]
+        public Produto Produto { get; set; }
 
         [Required]
         public double ValorUnitario { get; set; }

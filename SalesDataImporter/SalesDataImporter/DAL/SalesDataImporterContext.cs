@@ -19,6 +19,9 @@ namespace SalesDataImporter.DAL
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<DadosVenda> DadosVendas { get; set; }
 
-    
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
     }
 }

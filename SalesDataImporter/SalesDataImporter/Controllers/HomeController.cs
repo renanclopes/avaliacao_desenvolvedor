@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SalesDataImporter.DAL;
 using SalesDataImporter.Models;
 
 namespace SalesDataImporter.Controllers
 {
     public class HomeController : Controller
     {
+        private SalesDataImporterContext _dbContext = new SalesDataImporterContext();
+
         public ActionResult Index()
         {
             return View();

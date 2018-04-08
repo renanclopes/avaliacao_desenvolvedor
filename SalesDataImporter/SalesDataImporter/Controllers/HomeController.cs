@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,16 +11,16 @@ namespace SalesDataImporter.Controllers
 {
     public class HomeController : Controller
     {
-        private SalesDataImporterContext _dbContext = new SalesDataImporterContext();
+        private readonly SalesDataImporterContext _dbContext = new SalesDataImporterContext();
 
         public ActionResult Index()
         {
             return View();
         }
 
-        public Cliente GetClienteByName(string name)
+        public Cliente GetClienteByNome(string nome)
         {
-            return new Cliente {Id = 1, Nome = "Renan"};
+            return _dbContext.Clientes.FirstOrDefault(c => c.Nome == nome);
         }
 
         public Fornecedor GetFornecedorByRazaoSocial(string razao)
@@ -31,7 +32,6 @@ namespace SalesDataImporter.Controllers
         {
             return new Produto {Id = 1, Descricao = "Produto 1", Preco = 10};
         }
-
 
     }
 }

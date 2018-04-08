@@ -16,5 +16,8 @@ namespace SalesDataImporter.Models
         [Required]
         public string Nome { get; set; }
 
+        [Required]
+        public string Endereco { get; set; }
+
     }
 }

@@ -16,7 +16,6 @@ namespace SalesDataImporter.Models
         [Required]
         public int ClienteId { get; set; }
         [ForeignKey("ClienteId")]
-
         public Cliente Cliente { get; set; }
 
         [Required]
@@ -31,6 +30,9 @@ namespace SalesDataImporter.Models
 
         [Required]
         public double ValorUnitario { get; set; }
+
+        [Required]
+        public double Quantidade { get; set; }
 
         [Required]
         public double Total { get; set; }

@@ -15,8 +15,8 @@ Sua utilização tem como objetivo a importação de arquivos de vendas no forma
 ## Configurações para execução da aplicação
 
 * Faça o clone ou baixe o projeto em um diretório de sua preferência;
-* Altere o arquivo web.config, indicando o nome da instância, usuário e senha do seu banco de dados SQL SERVER;
 * Abra o projeto no Visual Studio 2015 ou superior;
+* Altere o arquivo web.config, indicando o nome da instância, usuário e senha do seu banco de dados SQL SERVER;
 * Faça o build do projeto;
 * Execute-o
 

@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Importacao";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Importação de arquivos de Vendas</h2>
+
+<!DOCTYPE html>
+ 
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Index</title>
+</head>
+<body>
+@using (Html.BeginForm("ImportarArquivo", "Importacao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="arquivo"/>
+
+    <input type="submit" value="Importar"/>
+}
+</body>
+</html>
+

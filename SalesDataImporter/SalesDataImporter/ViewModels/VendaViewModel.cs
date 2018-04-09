@@ -8,8 +8,9 @@ namespace SalesDataImporter.ViewModels
 {
     public class VendaViewModel
     {
-        private Cliente Cliente { get; set; }
-        private Fornecedor Fornecedor { get; set; }
-        private Produto Produto { get; set; }
+        public List<Cliente> Clientes { get; set; }
+        public List<Fornecedor> Fornecedores { get; set; }
+        public List<Produto> Produtos { get; set; }
+        public List<DadosVenda> DadosVenda { get; set; }
     }
 }

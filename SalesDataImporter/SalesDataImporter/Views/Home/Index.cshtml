@@ -1,3 +1,59 @@
-﻿@{
+﻿@model SalesDataImporter.ViewModels.VendaViewModel
+
+@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>Dados de Vendas</h2>
+
+@if (Model.DadosVenda.Count == 0)
+{
+    <h4>Sem dados de vendas!</h4>
+}
+else
+{
+    <table class="table">
+
+        <tr>
+            <th>Comprador</th>
+            <th>Descrição Produto</th>
+            <th>Preço Unitário</th>
+            <th>Quantidade</th>
+            <th>Total</th>
+            <th>Endereço</th>
+            <th>Fornecedor</th>
+        </tr>
+
+        @foreach (var item in Model.DadosVenda)
+        {
+            <tr>
+                <td>
+                    @Model.Clientes.FirstOrDefault(c => c.Id == item.ClienteId).Nome
+                </td>
+                <td>
+                    @Model.Produtos.FirstOrDefault(p => p.Id == item.ProdutoId).Descricao
+                </td>
+                <td>
+                    @item.ValorUnitario
+                </td>
+                <td>
+                    @item.Quantidade
+                </td>
+                <td>
+                    @item.Total
+                </td>
+                <td>
+                    @Model.Clientes.FirstOrDefault(c => c.Id == item.ClienteId).Endereco
+                </td>
+                <td>
+                    @Model.Fornecedores.FirstOrDefault(f => f.Id == item.FornecedorId).RazaoSocial
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+
+
+

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -45,7 +41,6 @@ namespace SalesDataImporter.Controllers
             }
 
             var filePath = path + Path.GetFileName(arquivo.FileName);
-            var extension = Path.GetExtension(arquivo.FileName);
             arquivo.SaveAs(filePath);
 
             var arquivoTxt = System.IO.File.ReadAllLines(filePath);

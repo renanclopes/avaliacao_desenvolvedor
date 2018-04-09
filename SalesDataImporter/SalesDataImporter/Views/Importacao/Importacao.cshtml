@@ -5,21 +5,24 @@
 }
 
 <h2>Importação de arquivos de Vendas</h2>
-
+<br>
 <!DOCTYPE html>
- 
+
 <html>
 <head>
-    <meta name="viewport" content="width=device-width"/>
+    <meta name="viewport" content="width=device-width" />
     <title>Index</title>
 </head>
 <body>
-@using (Html.BeginForm("ImportarArquivo", "Importacao", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <input type="file" name="arquivo"/>
-
-    <input type="submit" value="Importar"/>
-}
+    @using (Html.BeginForm("ImportarArquivo", "Importacao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="arquivo" />
+        <br>
+        <input type="submit" value="Importar" />
+    }
 </body>
 </html>
+<br>
+<br>
+@Html.ActionLink("Voltar", "Index", "Home")
 

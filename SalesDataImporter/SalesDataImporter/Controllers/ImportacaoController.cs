@@ -1,10 +1,10 @@
-﻿using System;
+﻿using SalesDataImporter.DAL;
+using SalesDataImporter.Models;
+using System;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SalesDataImporter.DAL;
-using SalesDataImporter.Models;
 
 namespace SalesDataImporter.Controllers
 {
@@ -31,76 +31,101 @@ namespace SalesDataImporter.Controllers
         [HttpPost]
         public ActionResult ImportarArquivo(HttpPostedFileBase arquivo)
         {
-            if (arquivo == null)
-                return RedirectToAction("Importacao");
-
-            var path = Server.MapPath("~/Uploads/");
-            if (!Directory.Exists(path))
+            try
             {
-                Directory.CreateDirectory(path);
-            }
-
-            var filePath = path + Path.GetFileName(arquivo.FileName);
-            arquivo.SaveAs(filePath);
-
-            var arquivoTxt = System.IO.File.ReadAllLines(filePath);
-
-            const char splitChar = '\t';
-
-            foreach (var linha in arquivoTxt)
-            {
-                if (linha == arquivoTxt[0]) continue;
-
-                var vendaInfo = linha.Split(splitChar);
-
-                var consultaCliente = GetClienteByNome(vendaInfo[(int)DadosLinhaArquivo.NomeCliente]);
-                var cliente = consultaCliente ??
-                              new Cliente
-                              {
-                                  Nome = vendaInfo[(int)DadosLinhaArquivo.NomeCliente],
-                                  Endereco = vendaInfo[(int)DadosLinhaArquivo.EnderecoCliente]
-                              };
-                if (consultaCliente == null)
-                    _dbContext.Clientes.Add(cliente);
-
-                var consultaFornecedor = GetFornecedorByRazaoSocial(vendaInfo[(int)DadosLinhaArquivo.RazaoSocialFornecedor]);
-                var fornecedor = consultaFornecedor ??
-                                 new Fornecedor { RazaoSocial = vendaInfo[(int)DadosLinhaArquivo.RazaoSocialFornecedor] };
-                if (consultaFornecedor == null)
-                    _dbContext.Fornecedores.Add(fornecedor);
-
-                var consultaProduto = GetProdutoByDescricao(vendaInfo[(int)DadosLinhaArquivo.DescricaoProduto]);
-                var produto = consultaProduto ??
-                              new Produto
-                              {
-                                  Descricao = vendaInfo[(int)DadosLinhaArquivo.DescricaoProduto],
-                                  Preco = Convert.ToDouble(vendaInfo[(int)DadosLinhaArquivo.PrecoProduto].Replace(".",","))
-                              };
-                if (consultaProduto == null)
-                    _dbContext.Produtos.Add(produto);
-
-                if (ModelState.IsValid)
-                    _dbContext.SaveChanges();
-
-                cliente = GetClienteByNome(vendaInfo[(int)DadosLinhaArquivo.NomeCliente]);
-                fornecedor = GetFornecedorByRazaoSocial(vendaInfo[(int)DadosLinhaArquivo.RazaoSocialFornecedor]);
-                produto = GetProdutoByDescricao(vendaInfo[(int)DadosLinhaArquivo.DescricaoProduto]);
-
-                var dadosVenda = new DadosVenda
+                if (arquivo == null)
                 {
-                    ClienteId = cliente.Id,
-                    FornecedorId = fornecedor.Id,
-                    ProdutoId = produto.Id,
-                    ValorUnitario = produto.Preco,
-                    Quantidade = Convert.ToDouble(vendaInfo[(int)DadosLinhaArquivo.Quantidade]),
-                    Total = produto.Preco * Convert.ToDouble(vendaInfo[(int)DadosLinhaArquivo.Quantidade])
-                };
+                    var mensagem = "Nenhum arquivo foi selecionado!";
+                    return RedirectToAction("Erro", new { message = mensagem });
+                }
 
-                _dbContext.DadosVendas.Add(dadosVenda);
+                var extensaoArquivo = Path.GetExtension(arquivo.FileName).ToLower();
+                if (extensaoArquivo != ".txt")
+                {
+                    var mensagem = "Arquivo inválido. Importe um arquivo .txt!";
+                    return RedirectToAction("Erro", new { message = mensagem });
+                }
 
-                if (ModelState.IsValid)
-                    _dbContext.SaveChanges();
+                if (arquivo.ContentLength == 0)
+                {
+                    var mensagem = "O arquivo selecionado não contém dados!";
+                    return RedirectToAction("Erro", new { message = mensagem });
+                }
+
+                var path = Server.MapPath("~/Uploads/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                var filePath = path + Path.GetFileName(arquivo.FileName);
+                arquivo.SaveAs(filePath);
+
+                var arquivoTxt = System.IO.File.ReadAllLines(filePath);
+
+                const char splitChar = '\t';
+
+                foreach (var linha in arquivoTxt)
+                {
+                    if (linha == arquivoTxt[0]) continue;
+
+                    var vendaInfo = linha.Split(splitChar);
+
+                    var consultaCliente = GetClienteByNome(vendaInfo[(int)DadosLinhaArquivo.NomeCliente]);
+                    var cliente = consultaCliente ??
+                                  new Cliente
+                                  {
+                                      Nome = vendaInfo[(int)DadosLinhaArquivo.NomeCliente],
+                                      Endereco = vendaInfo[(int)DadosLinhaArquivo.EnderecoCliente]
+                                  };
+                    if (consultaCliente == null)
+                        _dbContext.Clientes.Add(cliente);
+
+                    var consultaFornecedor = GetFornecedorByRazaoSocial(vendaInfo[(int)DadosLinhaArquivo.RazaoSocialFornecedor]);
+                    var fornecedor = consultaFornecedor ??
+                                     new Fornecedor { RazaoSocial = vendaInfo[(int)DadosLinhaArquivo.RazaoSocialFornecedor] };
+                    if (consultaFornecedor == null)
+                        _dbContext.Fornecedores.Add(fornecedor);
+
+                    var consultaProduto = GetProdutoByDescricao(vendaInfo[(int)DadosLinhaArquivo.DescricaoProduto]);
+                    var produto = consultaProduto ??
+                                  new Produto
+                                  {
+                                      Descricao = vendaInfo[(int)DadosLinhaArquivo.DescricaoProduto],
+                                      Preco = Convert.ToDouble(vendaInfo[(int)DadosLinhaArquivo.PrecoProduto].Replace(".", ","))
+                                  };
+                    if (consultaProduto == null)
+                        _dbContext.Produtos.Add(produto);
+
+                    if (ModelState.IsValid)
+                        _dbContext.SaveChanges();
+
+                    cliente = GetClienteByNome(vendaInfo[(int)DadosLinhaArquivo.NomeCliente]);
+                    fornecedor = GetFornecedorByRazaoSocial(vendaInfo[(int)DadosLinhaArquivo.RazaoSocialFornecedor]);
+                    produto = GetProdutoByDescricao(vendaInfo[(int)DadosLinhaArquivo.DescricaoProduto]);
+
+                    var dadosVenda = new DadosVenda
+                    {
+                        ClienteId = cliente.Id,
+                        FornecedorId = fornecedor.Id,
+                        ProdutoId = produto.Id,
+                        ValorUnitario = produto.Preco,
+                        Quantidade = Convert.ToDouble(vendaInfo[(int)DadosLinhaArquivo.Quantidade]),
+                        Total = produto.Preco * Convert.ToDouble(vendaInfo[(int)DadosLinhaArquivo.Quantidade])
+                    };
+
+                    _dbContext.DadosVendas.Add(dadosVenda);
+
+                    if (ModelState.IsValid)
+                        _dbContext.SaveChanges();
+                }
             }
+            catch (Exception e)
+            {
+                var mensagem = "Erro na importação do arquivo. Por favor verifique a estrutura do arquivo e tente novamente!";
+                return RedirectToAction("Erro", new { message = mensagem });
+            }
+            
 
             return RedirectToAction("Index", "Home");
         }
@@ -118,6 +143,12 @@ namespace SalesDataImporter.Controllers
         public Produto GetProdutoByDescricao(string descricao)
         {
             return _dbContext.Produtos.FirstOrDefault(p => p.Descricao == descricao);
+        }
+
+        public ActionResult Erro(string message)
+        {
+            ViewBag.Error = message;
+            return View();
         }
     }
 }

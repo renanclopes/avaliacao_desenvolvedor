@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Erro";
+}
+
+<h2>Problema na importação do arquivo</h2>
+
+@if (ViewBag.Error != null)
+{
+    <h4> @ViewBag.Error</h4>
+}
+
+@Html.ActionLink("Voltar", "Importacao")
+
+

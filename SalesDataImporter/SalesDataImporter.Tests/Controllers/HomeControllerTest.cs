@@ -16,10 +16,23 @@ namespace SalesDataImporter.Tests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            var result = controller.Index() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void Importacao()
+        {
+            // Arrange
+            var controller = new ImportacaoController();
+
+            // Act
+            var result = controller.Importacao() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

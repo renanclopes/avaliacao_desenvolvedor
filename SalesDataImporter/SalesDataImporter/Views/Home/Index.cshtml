@@ -36,13 +36,13 @@ else
                     @Model.Produtos.FirstOrDefault(p => p.Id == item.ProdutoId).Descricao
                 </td>
                 <td>
-                    @item.ValorUnitario
+                    @item.ValorUnitario.ToString("C")
                 </td>
                 <td>
                     @item.Quantidade
                 </td>
                 <td>
-                    @item.Total
+                    @item.Total.ToString("C")
                 </td>
                 <td>
                     @Model.Clientes.FirstOrDefault(c => c.Id == item.ClienteId).Endereco
@@ -52,6 +52,21 @@ else
                 </td>
             </tr>
         }
+    </table>
+
+    <table class="table">
+        <tr>
+            <th>Quantidade Total</th>
+            <th>Valor Total</th>
+        </tr>
+        <tr>
+            <td>
+                @Model.DadosVenda.Sum(x => x.Quantidade)
+            </td>
+            <td>
+                @Model.DadosVenda.Sum(x => x.Total).ToString("C")
+            </td>
+        </tr>
     </table>
 }
 

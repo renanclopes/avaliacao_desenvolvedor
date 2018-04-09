@@ -16,20 +16,23 @@ Sua utilização tem como objetivo a importação de arquivos de vendas no forma
 
 * Faça o clone ou baixe o projeto em um diretório de sua preferência;
 * Altere o arquivo web.config, indicando o nome da instância, usuário e senha do seu banco de dados SQL SERVER;
+* Abra o projeto no Visual Studio 2015 ou superior;
 * Faça o build do projeto;
 * Execute-o
 
 ## Manual de funcionamento
 
-* Na primeira execução da aplicação, o banco de dados "SalesDataImporter" será criado com as seguintes tabelas:
+Na primeira execução da aplicação, o banco de dados "SalesDataImporter" será criado com as seguintes tabelas:
 
-⋅⋅* Cliente
-⋅⋅* Fornecedor
-⋅⋅* Produto
-⋅⋅* DadosVenda
+* Cliente
+* Fornecedor
+* Produto
+* DadosVenda
 
-* A página incial irá exibir os dados das vendas importadas ou pedirá para que sejam importados arquivos caso não existam dados importados.
+A página incial irá exibir os dados das vendas importadas ou pedirá para que sejam importados arquivos caso não existam dados importados.
 
-* A página de importação poderá ser acessada pelo menu "Importação" ou pela própria página inicial enquanto não houver registros de vendas.
+A página de importação poderá ser acessada pelo menu "Importação" ou pela própria página inicial enquanto não houver registros de vendas. Para importar, escolha o arquivo de venda salvo no seu computador e clique no botão "Importar".
+
+A cada importação, além dos dados de venda, a aplicação também fará o cadastro de clientes, produtos e fornecedores existentes no arquivo.
 
 

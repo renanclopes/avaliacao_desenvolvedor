@@ -21,14 +21,15 @@ Sua utilização tem como objetivo a importação de arquivos de vendas no forma
 
 ## Manual de funcionamento
 
-- Na primeira execução da aplicação, o banco de dados "SalesDataImporter" será criado com as seguintes tabelas:
--- Cliente
--- Fornecedor
--- Produto
--- DadosVenda
+* Na primeira execução da aplicação, o banco de dados "SalesDataImporter" será criado com as seguintes tabelas:
 
-- A página incial irá exibir os dados das vendas importadas ou pedirá para que sejam importados arquivos caso não exista dados importados.
+- Cliente
+- Fornecedor
+- Produto
+- DadosVenda
 
-- A página de importação poderá ser acessada pelo menu "Importação" ou pela própria página inicial enquanto não houver registros de vendas.
+* A página incial irá exibir os dados das vendas importadas ou pedirá para que sejam importados arquivos caso não existam dados importados.
+
+* A página de importação poderá ser acessada pelo menu "Importação" ou pela própria página inicial enquanto não houver registros de vendas.
 
 

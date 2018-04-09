@@ -6,6 +6,9 @@
 *.user
 *.sln.docstates
 .vs/
+.SalesDataImporter/.vs/
+.SalesDataImporter/SalesDataImporter.Tests/bin/Debug/
+.SalesDataImporter/SalesDataImporter.Tests/obj/Debug/
 
 # Build results
 [Dd]ebug/

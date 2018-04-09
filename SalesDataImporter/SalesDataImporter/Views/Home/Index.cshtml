@@ -9,7 +9,8 @@
 
 @if (Model.DadosVenda.Count == 0)
 {
-    <h4>Sem dados de vendas!</h4>
+    <h5>Sem dados de vendas!</h5>
+    <h6>Utilize a @Html.ActionLink("importação", "Importacao", "Importacao") para inserir dados de vendas...</h6>
 }
 else
 {

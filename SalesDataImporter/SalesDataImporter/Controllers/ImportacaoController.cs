@@ -23,7 +23,7 @@ namespace SalesDataImporter.Controllers
         }
 
 
-        public ActionResult Index()
+        public ActionResult Importacao()
         {
             return View();
         }
@@ -32,7 +32,7 @@ namespace SalesDataImporter.Controllers
         public ActionResult ImportarArquivo(HttpPostedFileBase arquivo)
         {
             if (arquivo == null)
-                return RedirectToAction("Index");
+                return RedirectToAction("Importacao");
 
             var path = Server.MapPath("~/Uploads/");
             if (!Directory.Exists(path))

@@ -92,4 +92,3 @@ C:\WebProjects\avaliacao_desenvolvedor\SalesDataImporter\SalesDataImporter\bin\E
 C:\WebProjects\avaliacao_desenvolvedor\SalesDataImporter\SalesDataImporter\bin\EntityFramework.SqlServer.dll
 C:\WebProjects\avaliacao_desenvolvedor\SalesDataImporter\SalesDataImporter\bin\EntityFramework.xml
 C:\WebProjects\avaliacao_desenvolvedor\SalesDataImporter\SalesDataImporter\bin\EntityFramework.SqlServer.xml
-C:\WebProjects\avaliacao_desenvolvedor\SalesDataImporter\SalesDataImporter\obj\Debug\SalesDataImporter.csprojResolveAssemblyReference.cache

@@ -34,29 +34,18 @@ namespace SalesDataImporter.Controllers
             try
             {
                 if (arquivo == null)
-                {
-                    var mensagem = "Nenhum arquivo foi selecionado!";
-                    return RedirectToAction("Erro", new { message = mensagem });
-                }
+                    return RedirectToAction("Erro", new { message = "Nenhum arquivo foi selecionado!" });
 
-                var extensaoArquivo = Path.GetExtension(arquivo.FileName).ToLower();
+                var extensaoArquivo = Path.GetExtension(arquivo.FileName)?.ToLower();
                 if (extensaoArquivo != ".txt")
-                {
-                    var mensagem = "Arquivo inválido. Importe um arquivo .txt!";
-                    return RedirectToAction("Erro", new { message = mensagem });
-                }
+                    return RedirectToAction("Erro", new { message = "Arquivo inválido. Importe um arquivo .txt!" });
 
                 if (arquivo.ContentLength == 0)
-                {
-                    var mensagem = "O arquivo selecionado não contém dados!";
-                    return RedirectToAction("Erro", new { message = mensagem });
-                }
+                    return RedirectToAction("Erro", new { message = "O arquivo selecionado não contém dados!" });
 
                 var path = Server.MapPath("~/Uploads/");
                 if (!Directory.Exists(path))
-                {
                     Directory.CreateDirectory(path);
-                }
 
                 var filePath = path + Path.GetFileName(arquivo.FileName);
                 arquivo.SaveAs(filePath);
@@ -122,10 +111,8 @@ namespace SalesDataImporter.Controllers
             }
             catch (Exception e)
             {
-                var mensagem = "Erro na importação do arquivo. Por favor verifique a estrutura do arquivo e tente novamente!";
-                return RedirectToAction("Erro", new { message = mensagem });
+                return RedirectToAction("Erro", new { message = "Erro na importação do arquivo. Por favor verifique a estrutura do arquivo e tente novamente!" });
             }
-            
 
             return RedirectToAction("Index", "Home");
         }
